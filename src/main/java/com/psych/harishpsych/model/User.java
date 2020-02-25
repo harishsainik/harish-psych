@@ -13,13 +13,13 @@ import java.util.Set;
 @Table(name = "users")
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public abstract class User extends Auditable {
-    @Getter
+    @Getter @Setter
     @Email
     @NotBlank
     @Column(unique = true)
     private String email;
 
-    @Getter
+    @Getter @Setter
     @NotBlank
     private String saltedHashedPassword;
 
@@ -27,11 +27,4 @@ public abstract class User extends Auditable {
     @ManyToMany
     Set<Role> roles = new HashSet<>();
 
-    public void setEmail(String email){
-        this.email = email;
-    }
-
-    public void setSaltedHashedPassword(String saltedHashedPassword) {
-        this.saltedHashedPassword = saltedHashedPassword;
-    }
 }

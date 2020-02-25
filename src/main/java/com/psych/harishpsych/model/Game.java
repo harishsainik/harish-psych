@@ -1,9 +1,12 @@
 package com.psych.harishpsych.model;
 
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.util.*;
 
@@ -12,10 +15,12 @@ import java.util.*;
 public class Game extends Auditable{
     @ManyToMany
     @Getter @Setter
-    private Set<Player> players;
+    @JsonIdentityReference
+    private Set<Player> players = new HashSet<>();
 
     @Getter @Setter
     @Enumerated(EnumType.STRING)
+    @NotNull
     private GameMode gameMode;
 
     @Getter @Setter
@@ -23,6 +28,7 @@ public class Game extends Auditable{
 
     @OneToMany(mappedBy = "game", cascade = CascadeType.ALL)
     @Getter @Setter
+    @JsonManagedReference
     private List<Round> rounds = new ArrayList<>();
 
     @Getter @Setter
@@ -31,10 +37,12 @@ public class Game extends Auditable{
     @ManyToOne
     @Getter @Setter
     @NotNull
+    @JsonIdentityReference
     private Player leader;
 
     @ManyToMany(cascade = CascadeType.ALL)
     @Getter @Setter
+    @JsonIdentityReference
     private Map<Player, Stat> playerStats = new HashMap<>();
 
     @Enumerated(EnumType.STRING)
@@ -42,5 +50,6 @@ public class Game extends Auditable{
     private GameStatus gameStatus;
 
     @ManyToMany
+    @JsonIdentityReference
     private Set<Player> readyPlayers = new HashSet<>();
 }

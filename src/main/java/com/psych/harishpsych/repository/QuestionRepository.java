@@ -1,4 +1,4 @@
-package com.psych.harishpsych;
+package com.psych.harishpsych.repository;
 
 import com.psych.harishpsych.model.Question;
 import org.springframework.data.jpa.repository.JpaRepository;

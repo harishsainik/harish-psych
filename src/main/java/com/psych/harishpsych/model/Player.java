@@ -1,5 +1,7 @@
 package com.psych.harishpsych.model;
 
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -25,28 +27,17 @@ public class Player extends User {
 
     @OneToOne(cascade = CascadeType.ALL)
     @Getter @Setter
+    @JsonManagedReference
     private Stat stat = new Stat();
 
     @ManyToMany(mappedBy = "players")
     @Getter @Setter
+    @JsonIdentityReference
     private Set<Game> games = new HashSet<>();
 
 
     public Player() {
     }
-
-    public void setAlias(String alias) {
-        this.alias = alias;
-    }
-
-    public void setPsychFaceURL(String psychFaceURL) {
-        this.psychFaceURL = psychFaceURL;
-    }
-
-    public void setPicURL(String picUrl) {
-        this.picURL = picUrl;
-    }
-
     private Player(Builder builder) {
         setEmail(builder.email);
         setSaltedHashedPassword(builder.saltedHashedPassword);

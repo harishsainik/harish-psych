@@ -1,5 +1,6 @@
 package com.psych.harishpsych.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -15,6 +16,7 @@ public class EllenAnswer extends  Auditable{
     @NotNull
     @Getter @Setter
     @ManyToOne
+    @JsonBackReference
     private Question question;
 
     @NotNull

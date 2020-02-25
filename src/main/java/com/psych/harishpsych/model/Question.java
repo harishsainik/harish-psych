@@ -1,5 +1,6 @@
 package com.psych.harishpsych.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -22,6 +23,7 @@ public class Question extends Auditable{
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "question")
     @Getter @Setter
+    @JsonManagedReference
     private Set<EllenAnswer> ellenAnswers =  new HashSet<>();
 
     @NotNull

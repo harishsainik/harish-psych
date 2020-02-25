@@ -1,5 +1,8 @@
 package com.psych.harishpsych.model;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerator;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.annotation.CreatedDate;
@@ -11,6 +14,10 @@ import java.io.Serializable;
 import java.util.Date;
 
 @MappedSuperclass
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.StringIdGenerator.class,
+        property = "id"
+)
 @EntityListeners(AuditingEntityListener.class)
 public abstract class Auditable implements Serializable {
     @Id
