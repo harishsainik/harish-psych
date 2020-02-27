@@ -1,12 +1,10 @@
-package com.psych.harishpsych;
+package com.psych.harishpsych.controller;
 
-import com.psych.harishpsych.model.Game;
-import com.psych.harishpsych.model.GameMode;
-import com.psych.harishpsych.model.Player;
-import com.psych.harishpsych.model.Question;
+import com.psych.harishpsych.model.*;
 import com.psych.harishpsych.repository.GameRepository;
 import com.psych.harishpsych.repository.PlayerRepository;
 import com.psych.harishpsych.repository.QuestionRepository;
+import com.psych.harishpsych.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,13 +15,15 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/dev-test")
-public class HelloWorldController {
+public class DevTestController {
     @Autowired
     private PlayerRepository playerRepository;
     @Autowired
     private QuestionRepository questionRepository;
     @Autowired
     private GameRepository gameRepository;
+    @Autowired
+    private UserRepository userRepository;
 
     @GetMapping("/")
     public String hello(){
@@ -54,7 +54,7 @@ public class HelloWorldController {
         playerRepository.save(sachin);
         questionRepository.save(new Question("When was the first computer invented?", "1940s", GameMode.IS_THIS_A_FACT));
         Game game = new Game();
-        game.getPlayers().add(saitama);
+        game.getPlayers().add(sachin);
         game.setLeader(sachin);
         game.setGameMode(GameMode.IS_THIS_A_FACT);
         gameRepository.save(game);
@@ -88,6 +88,15 @@ public class HelloWorldController {
     @GetMapping("/game/{id}")
     public Game getGameById(@PathVariable(name = "id") Long id){
         return gameRepository.findById(id).orElseThrow(IllegalArgumentException::new);
+    }
+    @GetMapping("/users")
+    public List<User> getAllUsers(){
+        return userRepository.findAll();
+    }
+
+    @GetMapping("/user/{id}")
+    public User getUserById(@PathVariable(name = "id") Long id){
+        return userRepository.findById(id).orElseThrow(IllegalArgumentException::new);
     }
     //TODO:
     //Games
