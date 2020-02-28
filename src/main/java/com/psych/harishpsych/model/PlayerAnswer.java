@@ -29,4 +29,13 @@ public class PlayerAnswer extends Auditable{
     @ManyToOne
     @JsonIdentityReference
     private Player player;
+
+    public PlayerAnswer() {
+    }
+
+    public PlayerAnswer(@NotBlank String answer, @NotNull Round round, @NotNull Player player) {
+        this.answer = answer;
+        this.round = round;
+        this.player = player;
+    }
 }

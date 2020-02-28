@@ -2,6 +2,7 @@ package com.psych.harishpsych.model;
 
 import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.psych.harishpsych.controller.GamePlayController;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -44,6 +45,11 @@ public class Player extends User {
         setAlias(builder.alias);
         setPsychFaceURL(builder.psychFaceURL);
         setPicURL(builder.picURL);
+    }
+
+    public Game getCurrentGame() {
+        return null;
+        //todo
     }
 
     public static final class Builder {

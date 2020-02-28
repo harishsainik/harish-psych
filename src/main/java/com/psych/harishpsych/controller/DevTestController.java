@@ -1,5 +1,6 @@
 package com.psych.harishpsych.controller;
 
+import antlr.ASTNULLType;
 import com.psych.harishpsych.model.*;
 import com.psych.harishpsych.repository.GameRepository;
 import com.psych.harishpsych.repository.PlayerRepository;
@@ -24,6 +25,10 @@ public class DevTestController {
     private GameRepository gameRepository;
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private RoundRepository roundRepository;
+    @Autowired
+    private ContentWriterRepository contentWriterRepository;
 
     @GetMapping("/")
     public String hello(){
@@ -98,9 +103,22 @@ public class DevTestController {
     public User getUserById(@PathVariable(name = "id") Long id){
         return userRepository.findById(id).orElseThrow(IllegalArgumentException::new);
     }
-    //TODO:
-    //Games
-    //Players
-    //Rounds
-    //Content-Writers
+    @GetMapping("/rounds")
+    public List<Round> getAllRounds(){
+        return roundRepository.findAll();
+    }
+
+    @GetMapping("/user/{id}")
+    public Round getRoundById(@PathVariable(name = "id") Long id){
+        return roundRepository.findById(id).orElseThrow(IllegalArgumentException::new);
+    }
+    @GetMapping("/contentWriters")
+    public List<ContentWriter> getAllContentWriters(){
+        return contentWriterRepository.findAll();
+    }
+
+    @GetMapping("/user/{id}")
+    public ContentWriter getContentWriterById(@PathVariable(name = "id") Long id){
+        return contentWriterRepository.findById(id).orElseThrow(IllegalArgumentException::new);
+    }
 }
