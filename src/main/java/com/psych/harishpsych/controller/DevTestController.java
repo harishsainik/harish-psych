@@ -108,7 +108,7 @@ public class DevTestController {
         return roundRepository.findAll();
     }
 
-    @GetMapping("/user/{id}")
+    @GetMapping("/round/{id}")
     public Round getRoundById(@PathVariable(name = "id") Long id){
         return roundRepository.findById(id).orElseThrow(IllegalArgumentException::new);
     }
@@ -117,7 +117,7 @@ public class DevTestController {
         return contentWriterRepository.findAll();
     }
 
-    @GetMapping("/user/{id}")
+    @GetMapping("/contentWriters{id}")
     public ContentWriter getContentWriterById(@PathVariable(name = "id") Long id){
         return contentWriterRepository.findById(id).orElseThrow(IllegalArgumentException::new);
     }
